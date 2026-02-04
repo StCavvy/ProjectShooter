@@ -39,7 +39,7 @@ namespace Entities
 
         private void FixedUpdate()
         {
-            if (!_view) return;
+            if (!_view.IsMine) return;
             HandleMovement();
             HandleRotation();
         }
