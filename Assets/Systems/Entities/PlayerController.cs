@@ -1,7 +1,5 @@
 using System.Threading;
 using InputActions;
-using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,26 +18,29 @@ namespace Entities
         private Vector2 _lookInput;
         private float verticalRotation;
 
-        private PhotonView _view;
-
 
         private void Awake()
         {
             _playerControls = new PlayerControls();
             _rigidbody = GetComponent<Rigidbody>();
-            _view = GetComponent<PhotonView>();
 
             _playerControls.PlayerControllerActions.Move.performed += ctx => _moveInput = ctx.ReadValue<Vector2>();
             _playerControls.PlayerControllerActions.Move.canceled += ctx => _moveInput = Vector2.zero;
 
             _playerControls.PlayerControllerActions.Look.performed += ctx => _lookInput = ctx.ReadValue<Vector2>();
             _playerControls.PlayerControllerActions.Look.canceled += ctx => _lookInput = Vector2.zero;
+
             _camera.enabled = true;
+        }
+
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         private void FixedUpdate()
         {
-            if (!_view.IsMine) return;
             HandleMovement();
             HandleRotation();
         }

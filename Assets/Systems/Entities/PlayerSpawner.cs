@@ -1,4 +1,3 @@
-using Photon.Pun;
 using UnityEngine;
 
 namespace Entities
@@ -9,7 +8,7 @@ namespace Entities
         [SerializeField] private Transform _spawnPosition;
         private void Start()
         {
-            PhotonNetwork.Instantiate(_playerPrefabName, _spawnPosition.position, Quaternion.identity);
+           //Instantiate(_playerPrefabName, _spawnPosition.position, Quaternion.identity);
         }
 
     }
